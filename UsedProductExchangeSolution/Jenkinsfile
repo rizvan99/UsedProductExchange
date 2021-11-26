@@ -1,0 +1,16 @@
+pipeline {
+	agent any
+	triggers {cron('H * * * *')}
+	stages {
+		stage("Build") {
+			steps {
+				sh "dotnet build UsedProductExchangeSolution/UsedProductExchangeSolution.sln"
+			}
+		}
+		stage("Test"){
+			steps {
+				sh "dotnet test UsedProductExchangeSolution/UsedProductExchange.XUnitTestProject"
+			}
+		}
+	}
+}
